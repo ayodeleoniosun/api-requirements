@@ -1,6 +1,6 @@
 <?php
 
-use App\Domain\Product\Controllers\ProductController;
+use App\Domain\Product\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*

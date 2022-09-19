@@ -2,9 +2,10 @@
 
 namespace App\Domain\Product\Database\Seeders;
 
+use App\Domain\Product\Exceptions\ProductDatasetNotFoundException;
 use App\Domain\Product\Models\Category;
 use App\Domain\Product\Models\Product;
-use App\Domain\Product\Support\Enums\Category as CategoryEnum;
+use App\Domain\Product\Support\Enums\CategoryEnum as CategoryEnum;
 use App\Exceptions\CustomException;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -16,7 +17,7 @@ class ProductSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
-     * @throws CustomException
+     * @throws ProductDatasetNotFoundException
      */
     public function run(): void
     {
@@ -31,7 +32,7 @@ class ProductSeeder extends Seeder
                 $category = Category::create([
                     'name' => $productCategory,
                     'slug' => Str::snake($productCategory),
-                    'discount' => $productCategory === CategoryEnum::DISCOUNTABLE ? 30 : null
+                    'discount' => CategoryEnum::DISCOUNTABLE_CATEGORIES[$productCategory] ?? null,
                 ]);
             }
 
@@ -45,14 +46,14 @@ class ProductSeeder extends Seeder
     }
 
     /**
-     * @throws CustomException
+     * @throws ProductDatasetNotFoundException
      */
     private function getProducts()
     {
         $file = resource_path() . '/json/products.json';
 
         if (!File::exists($file)) {
-            throw new CustomException('Product dataset not found', 404);
+            throw new ProductDatasetNotFoundException('ProductEnum dataset not found');
         }
 
         return json_decode(file_get_contents($file), true)['products'];
