@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $migrationPath = app_path('Domain/*/Database/Migrations');
+        $directories = glob($migrationPath . '/*' , GLOB_ONLYDIR);
+        $paths = array_merge([$migrationPath], $directories);
+        $this->loadMigrationsFrom($paths);
     }
 }
