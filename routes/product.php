@@ -1,5 +1,8 @@
 <?php
 
+use App\Domain\Product\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,4 +14,8 @@
 |
 */
 
-require_once(__DIR__ . '/product.php');
+Route::prefix('products')->group(function () {
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/', 'index')->name('products.index');
+    });
+});
