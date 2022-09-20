@@ -9,9 +9,21 @@ use Illuminate\Http\Request;
 
 class ProductService implements ProductServiceContract
 {
-    public function index(Request $request)
+    public function index(Request $request): ProductCollection
     {
-        return new ProductCollection(Product::all());
+        $category = $request->input('category');
+        $price = $request->input('price');
+
+        $products = Product::query()
+            ->when($category, function ($query, $category) {
+                $query->filterByCategory($category);
+            })->when($price, function ($query, $price) {
+                $query->filterByPrice($price);
+            }, function ($query) {
+                $query->latest('products.created_at');
+            })->get();
+
+        return new ProductCollection($products);
     }
 
 }

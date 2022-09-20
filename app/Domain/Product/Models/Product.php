@@ -2,6 +2,7 @@
 
 namespace App\Domain\Product\Models;
 
+use App\Domain\Product\Models\Builders\ProductBuilder;
 use App\Domain\Product\Support\Enums\ProductEnum;
 use App\Domain\Product\Support\Presenters\ProductPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,19 +16,24 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $presenter = ProductPresenter::class;
+    protected string $presenter = ProductPresenter::class;
+
+    public function newEloquentBuilder($query): ProductBuilder
+    {
+        return new ProductBuilder($query);
+    }
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function getAmountAttribute()
+    public function getAmountAttribute(): float|int
     {
         return $this->price / 100;
     }
 
-    public function setPriceAttribute(int $price)
+    public function setPriceAttribute(int $price): float|int
     {
         return $this->attributes['price'] = $price * 100;
     }

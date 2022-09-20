@@ -2,7 +2,6 @@
 
 namespace App\Domain\Product\Models;
 
-use App\Domain\Product\Models\Builders\CategoryBuilder;
 use App\Domain\Product\Support\Enums\CategoryEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,11 +12,6 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
-    public function newEloquentBuilder($query): CategoryBuilder
-    {
-        return new CategoryBuilder($query);
-    }
 
     public function products(): HasMany
     {
