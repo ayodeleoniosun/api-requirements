@@ -1,4 +1,4 @@
-name: Sellit CI
+name: Api requirements CI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    name: Build
+    name: Build app
     runs-on: ubuntu-latest
 
     steps:
