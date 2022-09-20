@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $category,
             'slug' => Str::snake($category),
-            'discount' => $category === 'insurance' ? '30' : null
+            'discount' => $category === 'insurance' ? '30' : null,
         ];
     }
 }

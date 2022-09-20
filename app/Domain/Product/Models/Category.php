@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|float|null $discount_value
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Domain\Product\Models\Product[] $products
  * @property-read int|null $products_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category query()
@@ -43,7 +44,7 @@ class Category extends Model
 
     public function getDiscountValueAttribute(): float|int|null
     {
-        if (!$this->discount) {
+        if (! $this->discount) {
             return null;
         }
 
@@ -54,5 +55,4 @@ class Category extends Model
     {
         return in_array($this->name, array_keys(CategoryEnum::DISCOUNTABLE_CATEGORIES));
     }
-
 }

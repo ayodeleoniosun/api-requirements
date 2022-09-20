@@ -23,6 +23,7 @@ use Laracasts\Presenter\PresentableTrait;
  * @property-read \App\Domain\Product\Models\Category $category
  * @property-read int|float $amount
  * @property-read int|float|null $discount_value
+ *
  * @method static ProductBuilder|Product filterByCategory(string $category)
  * @method static ProductBuilder|Product filterByPrice(array $price)
  * @method static ProductBuilder|Product newModelQuery()
@@ -67,7 +68,7 @@ class Product extends Model
 
     public function getDiscountValueAttribute(): float|int|null
     {
-        if (!$this->isDiscountable()) {
+        if (! $this->isDiscountable()) {
             return null;
         }
 
@@ -78,5 +79,4 @@ class Product extends Model
     {
         return in_array($this->sku, array_keys(ProductEnum::DISCOUNTABLE_PRODUCT_SKUS));
     }
-
 }

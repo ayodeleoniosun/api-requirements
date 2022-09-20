@@ -41,11 +41,11 @@ class ProductPresenter extends Presenter
     private function getDiscountPercentage(Product $product): string|null
     {
         if ($product->isDiscountable()) {
-            return ProductEnum::DISCOUNTABLE_PRODUCT_SKUS[$product->sku] . '%';
+            return ProductEnum::DISCOUNTABLE_PRODUCT_SKUS[$product->sku].'%';
         }
 
         if ($product->category->isDiscountable()) {
-            return CategoryEnum::DISCOUNTABLE_CATEGORIES[$product->category->name] . '%';
+            return CategoryEnum::DISCOUNTABLE_CATEGORIES[$product->category->name].'%';
         }
 
         return null;

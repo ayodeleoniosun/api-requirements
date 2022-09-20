@@ -25,5 +25,4 @@ class ProductService implements ProductServiceContract
 
         return new ProductCollection($products);
     }
-
 }
