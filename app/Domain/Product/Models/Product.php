@@ -10,6 +10,33 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
 
+/**
+ * App\Domain\Product\Models\Product
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $category_id
+ * @property int $price
+ * @property string $sku
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domain\Product\Models\Category $category
+ * @property-read int|float $amount
+ * @property-read int|float|null $discount_value
+ * @method static ProductBuilder|Product filterByCategory(string $category)
+ * @method static ProductBuilder|Product filterByPrice(array $price)
+ * @method static ProductBuilder|Product newModelQuery()
+ * @method static ProductBuilder|Product newQuery()
+ * @method static ProductBuilder|Product query()
+ * @method static ProductBuilder|Product whereCategoryId($value)
+ * @method static ProductBuilder|Product whereCreatedAt($value)
+ * @method static ProductBuilder|Product whereId($value)
+ * @method static ProductBuilder|Product whereName($value)
+ * @method static ProductBuilder|Product wherePrice($value)
+ * @method static ProductBuilder|Product whereSku($value)
+ * @method static ProductBuilder|Product whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Product extends Model
 {
     use HasFactory, PresentableTrait;

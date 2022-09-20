@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
 
     /**
@@ -24,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $migrationPath = app_path('Domain/*/Database/Migrations');
-        $directories = glob($migrationPath . '/*' , GLOB_ONLYDIR);
+        $directories = glob($migrationPath . '/*', GLOB_ONLYDIR);
         $paths = array_merge([$migrationPath], $directories);
         $this->loadMigrationsFrom($paths);
     }
